@@ -1,0 +1,108 @@
+---
+title: Deck Builder (Sandbox)
+weight: 8
+---
+
+<style>
+    #deck {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    #deck .item {
+        display: inline-block;
+        float: none;
+        width: 24%;
+    }
+    #deck .edit cb-card {
+        opacity: 0.5;
+    }
+    .jumbotron {
+        text-align: center;
+    }
+    #deck .item cb-card {
+        font-size: 0.25em;
+    }
+    #available-combos {
+        overflow: auto;
+    }
+    #available-combos cb-card {
+        font-size: 0.28em;
+        float: left;
+        margin: 0 12px 12px 0;
+    }
+    .panel-footer {
+        margin-bottom: 3em;
+    }
+    hr { clear: both; }
+</style>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Add cards to analyze your deck and share it with others
+    </div>
+
+    <div id=setup class="panel-body">
+        <form class="form-inline" data-image-cdn="{{ site.images_cdn }}" onsubmit="return false;" name="deck">
+            <fieldset class="form-group">
+                <input class="form-control" data-cards="deck" placeholder="Please wait for cards to load..." id="card">
+
+                <div class="input-group">
+                    <input placeholder="card level, i.e. 5*" id="level" pattern='^\d+\s*[*]{0,2}$' class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default js-choose-card" type="submit" disabled>
+                            <span class="glyphicon glyphicon-plus"></span> Add
+                        </button>
+                    </span>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div id="result" style="display:none">
+        <div class="panel-body" id="deck" style="">
+        </div>
+        <div class="panel-footer">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Share this URL:</span>
+                <input readonly value="" class="form-control">
+                <span class="input-group-addon btn btn-success" id="save-your-deck">
+                    Save as your deck
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="jumbotron panel-body" id="overview" style="display: none;">
+        <div class="col-md-3">
+            <h1 data-card-role="character">n/a</h1> <p> character cards </p>
+        </div>
+        <div class="col-md-3">
+            <h1 data-card-role="item">n/a</h1> <p> item cards </p>
+        </div>
+        <div class="col-md-3">
+            <h1 data-card-role="precombo">n/a</h1> <p> precombo cards </p>
+        </div>
+        <div class="col-md-3">
+            <h1 data-card-role="combos">n/a</h1> <p> potential combos </p>
+        </div>
+    </div>
+
+    <div class="panel-warning" style="display: none;" id="problems">
+        <div class="panel-heading">Those cards can combo with less than 75% of your deck (excluding precombo), try working on it</div>
+    </div>
+
+    <div class="panel-heading">
+        Combos you can create using this deck
+        <div class="btn-group pull-right" role="group">
+            <button type="button" class="active btn btn-default btn-xs" data-group-by="">None</button>
+            <button type="button" class="btn btn-default btn-xs" data-group-by="character">Character</button>
+            <button type="button" class="btn btn-default btn-xs" data-group-by="item">Item</button>
+        </div>
+    </div><div class="panel-body" id="available-combos">
+    </div>
+</div> <!-- panel -->
+
+
+<script>require(['share-your-deck']);</script>

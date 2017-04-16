@@ -101,7 +101,7 @@ define(['cartoon-battle', 'cartoon-battle/util', 'cartoon-battle/Analysis'], fun
 
         analysis.getCombos(groupBy).forEach(function (comboGroup) {
             comboGroup.forEach(function (card) {
-                availableCombos.appendChild(cardList.forLevel(card.result).node)
+                availableCombos.appendChild(cardList.forLevel(card.result).node.classList.add('deemphasized-card'))
                     .title = card.character.name + ' + ' + card.item.name;
             });
 
@@ -235,3 +235,5 @@ define(['cartoon-battle', 'cartoon-battle/util', 'cartoon-battle/Analysis'], fun
         window.onpopstate();
     });
 });
+console.log("OK");
+alert("KK");
